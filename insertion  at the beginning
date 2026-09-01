@@ -1,0 +1,49 @@
+include <iostream>
+using namespace std;
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+class LinkedList {
+private:
+    Node* head;
+public:
+    LinkedList() {
+        head = nullptr;
+    }
+    void insertAtBeginning(int value) {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
+    }
+    void display() {
+        Node* temp = head;
+        while (temp != nullptr) {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        std::cout << "NULL" << std::endl;
+    }
+    ~LinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.insertAtBeginning(30);
+    list.insertAtBeginning(20);
+    list.insertAtBeginning(10);
+    list.display();
+    return 0;
+}
